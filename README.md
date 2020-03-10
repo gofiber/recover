@@ -20,7 +20,7 @@ func main() {
     Handler: func(c *fiber.Ctx, err error) {
       c.SendString(err.Error())
       c.SendStatus(500)
-    }
+    },
   }
 
   app.Use(recover.New(cfg))
