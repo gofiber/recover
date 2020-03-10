@@ -54,7 +54,7 @@ func New(config ...Config) func(*fiber.Ctx) {
 					err = fmt.Errorf("%v", r)
 				}
 				if cfg.Log {
-					cfg.Output.Write([]byte(err.Error()))
+					cfg.Output.Write([]byte(err.Error() + "\n"))
 				}
 				cfg.Handler(c, err)
 			}
