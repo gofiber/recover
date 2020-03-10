@@ -8,29 +8,30 @@ go get -u github.com/gofiber/recover
 package main
 
 import (
-  "github.com/gofiber/fiber"
-  "github.com/gofiber/recover"
+	"github.com/gofiber/fiber"
+	"github.com/gofiber/recover"
 )
 
 func main() {
-  app := fiber.New()
-  
-  // Optional config
-  cfg := logger.Config{
-    Handler: func(c *fiber.Ctx, err error) {
-      c.SendString(err.Error())
-      c.SendStatus(500)
-    },
-  }
+	app := fiber.New()
 
-  app.Use(recover.New(cfg))
+	cfg := recover.Config{
+		// Optional
+		Handler: func(c *fiber.Ctx, err error) {
+			c.SendString(err.Error())
+			c.SendStatus(500)
+		},
+	}
 
-  app.Get("/", func(c *fiber.Ctx) {
-    panic("Hi, I'm a error!")
-  })
+	app.Use(recover.New(cfg))
 
-  app.Listen(3000)
+	app.Get("/", func(c *fiber.Ctx) {
+		panic("Hi, I'm a error!")
+	})
+
+	app.Listen(3000)
 }
+
 ```
 ### Test
 ```curl
