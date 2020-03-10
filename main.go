@@ -28,8 +28,8 @@ type Config struct {
 	Output io.Writer
 }
 
-// Recover ...
-func Recover(config ...Config) func(*fiber.Ctx) {
+// New ...
+func New(config ...Config) func(*fiber.Ctx) {
 	// Init config
 	var cfg Config
 	// Set config if provided
