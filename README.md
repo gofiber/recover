@@ -14,9 +14,9 @@ import (
 
 func main() {
   app := fiber.New()
-
+  
+  // Optional config
   cfg := logger.Config{
-    // Optional
     Handler: func(c *fiber.Ctx, err error) {
       c.SendString(err.Error())
       c.SendStatus(500)
