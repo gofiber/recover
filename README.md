@@ -14,9 +14,9 @@ import (
 
 func main() {
 	app := fiber.New()
-
+  
+  // Optional
 	cfg := recover.Config{
-		// Optional
 		Handler: func(c *fiber.Ctx, err error) {
 			c.SendString(err.Error())
 			c.SendStatus(500)
@@ -31,7 +31,6 @@ func main() {
 
 	app.Listen(3000)
 }
-
 ```
 ### Test
 ```curl
