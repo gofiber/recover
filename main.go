@@ -14,9 +14,9 @@ import (
 
 // Config ...
 type Config struct {
-	// Skip defines a function to skip middleware.
+	// Filter defines a function to skip middleware.
 	// Optional. Default: nil
-	Skip func(*fiber.Ctx) bool
+	Filter func(*fiber.Ctx) bool
 	// Handler is called when a panic occurs
 	// Optional. Default: c.SendStatus(500)
 	Handler func(*fiber.Ctx, error)
@@ -47,6 +47,11 @@ func New(config ...Config) func(*fiber.Ctx) {
 	}
 	// Return middleware handle
 	return func(c *fiber.Ctx) {
+		// Filter request to skip middleware
+		if cfg.Filter != nil && cfg.Filter(c) {
+			c.Next()
+			return
+		}
 		defer func() {
 			if r := recover(); r != nil {
 				err, ok := r.(error)
