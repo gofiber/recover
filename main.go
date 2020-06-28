@@ -59,7 +59,7 @@ func New(config ...Config) func(*fiber.Ctx) {
 				}
 				// Log error
 				if cfg.Log {
-					cfg.Output.Write([]byte(err.Error() + "\n"))
+					_, _ = cfg.Output.Write([]byte(err.Error() + "\n"))
 				}
 				// Call next route and with error
 				c.Next(err)
