@@ -17,8 +17,7 @@ type Config struct {
 	// Filter defines a function to skip middleware.
 	// Optional. Default: nil
 	Filter func(*fiber.Ctx) bool
-	// Handler is called when a panic occurs
-	// Optional. Default: c.SendStatus(500)
+	// DEPRECTAED, Fiber Global ErrorHandler is called instead
 	Handler func(*fiber.Ctx, error)
 	// Log all errors to output
 	// Optional. Default: false
@@ -60,12 +59,10 @@ func New(config ...Config) func(*fiber.Ctx) {
 				}
 				// Log error
 				if cfg.Log {
-					cfg.Output.Write([]byte(err.Error() + "\n"))
+					_, _ = cfg.Output.Write([]byte(err.Error() + "\n"))
 				}
-				// Call next route and with error
-				// c.Next(err)
-				// Call error handler
-				cfg.Handler(c, err)
+				// Call global error handler
+				c.Next(err)
 			}
 		}()
 		c.Next()
