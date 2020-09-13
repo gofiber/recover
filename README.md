@@ -1,3 +1,3 @@
 # ⚠️ Deprecated repository
 
-This middleware is no longer maintained, please use the [Fiber Recover](https://github.com/gofiber/fiber/blob/master/middleware/recover.md) middleware
+This middleware is no longer maintained, it is available within [Fiber v2](https://github.com/gofiber/fiber/tree/master/middleware/recover).
